@@ -78,7 +78,7 @@ export function BookingModal({ open, initialService, onClose }: { open: boolean;
             <div className="grid gap-2">
               <p className="mb-1 text-sm text-muted-foreground">Escolha o serviço. Data e período são opcionais.</p>
               {SERVICES.map((s) => (
-                <Button variant="ghost" key={s.id} onClick={() => pick(s.id)} className={`flex items-center gap-3 rounded-2xl border p-2 text-left transition hover:border-primary ${serviceId === s.id ? "border-primary bg-secondary" : ""}`}>
+                <Button variant="ghost" key={s.id} onClick={() => pick(s.id)} className={`flex h-auto items-center justify-start gap-3 rounded-2xl border p-2 text-left transition hover:border-primary ${serviceId === s.id ? "border-primary bg-secondary" : ""}`}>
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary text-gold"><s.icon className="h-5 w-5" aria-hidden="true" /></span>
                   <div className="min-w-0 flex-1">
                     <p className="truncate font-medium">{s.title}</p>
