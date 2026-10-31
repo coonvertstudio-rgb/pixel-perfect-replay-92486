@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { X, Check, ChevronLeft, MessageCircle, Info } from "lucide-react";
+import { X, Check, ChevronLeft, MessageCircle } from "lucide-react";
 import { SERVICES, PERIODS, NO_PREF, fmtDate, buildBookingMessage, waLink, todayLocal } from "@/lib/salon";
 
 import { Button } from "@/components/ui/button";
@@ -56,7 +56,7 @@ export function BookingModal({ open, initialService, onClose }: { open: boolean;
   return (
     <DialogPrimitive.Root open={open} onOpenChange={(value) => { if (!value) onClose(); }}>
       <DialogPrimitive.Portal>
-      <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-plum/60 backdrop-blur-sm" />
+      <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-plum/70 backdrop-blur-sm" />
       <DialogPrimitive.Content aria-describedby="booking-description" className="fixed bottom-0 left-1/2 z-50 flex max-h-[92dvh] w-full max-w-lg -translate-x-1/2 flex-col overflow-hidden rounded-t-3xl bg-card shadow-soft sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 sm:rounded-3xl">
         <div className="flex items-center justify-between border-b px-5 py-4">
           <div className="flex items-center gap-2">
@@ -76,10 +76,10 @@ export function BookingModal({ open, initialService, onClose }: { open: boolean;
         <div className="flex-1 overflow-y-auto px-5 py-5">
           {step === "service" && (
             <div className="grid gap-2">
-              <p className="mb-1 text-sm text-muted-foreground">Escolha o serviço. Depois, se quiser, indique data e período — tudo é confirmado pelo salão no WhatsApp.</p>
+              <p className="mb-1 text-sm text-muted-foreground">Escolha o serviço. Data e período são opcionais.</p>
               {SERVICES.map((s) => (
                 <Button variant="ghost" key={s.id} onClick={() => pick(s.id)} className={`flex items-center gap-3 rounded-2xl border p-2 text-left transition hover:border-primary ${serviceId === s.id ? "border-primary bg-secondary" : ""}`}>
-                  <img src={s.img} alt="" className="h-11 w-11 shrink-0 rounded-lg object-cover" />
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary text-gold"><s.icon className="h-5 w-5" aria-hidden="true" /></span>
                   <div className="min-w-0 flex-1">
                     <p className="truncate font-medium">{s.title}</p>
                     <p className="truncate text-xs text-muted-foreground">{s.category} · Valor sob consulta</p>
@@ -133,10 +133,6 @@ export function BookingModal({ open, initialService, onClose }: { open: boolean;
                   </div>
                 ))}
               </dl>
-              <div className="flex gap-3 rounded-2xl bg-secondary p-3.5 text-sm text-secondary-foreground">
-                <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <p>Esta é uma demonstração. O pedido será enviado à Convert Studio, sem agendamento real.</p>
-              </div>
             </div>
           )}
         </div>
@@ -146,9 +142,9 @@ export function BookingModal({ open, initialService, onClose }: { open: boolean;
           {step === "summary" && (
             <div className="grid gap-2">
               {waUrl && <Button asChild className="h-auto min-h-12 w-full whitespace-normal rounded-full bg-brand text-center font-medium text-primary-foreground hover:opacity-90">
-                <a href={waUrl} target="_blank" rel="noopener noreferrer" data-testid="wa-link"><MessageCircle className="h-5 w-5" /> Enviar demonstração pelo WhatsApp</a>
+                <a href={waUrl} target="_blank" rel="noopener noreferrer" data-testid="wa-link"><MessageCircle className="h-5 w-5" /> Enviar pedido pelo WhatsApp</a>
               </Button>}
-              <p className="text-center text-xs text-muted-foreground">{waUrl ? "Revise e envie sua solicitação pelo WhatsApp." : "Demonstração sem envio configurado."}</p>
+              <p className="text-center text-xs text-muted-foreground">{waUrl ? "O salão confirma o horário pelo WhatsApp." : "WhatsApp indisponível no momento."}</p>
             </div>
           )}
           {step === "service" && <p className="text-center text-xs text-muted-foreground">Escolha um serviço para continuar</p>}
