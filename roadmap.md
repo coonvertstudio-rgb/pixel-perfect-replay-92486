@@ -1,7 +1,9 @@
-# Studio Deluxe
+# Império da Beleza by Aline Garrido
 
-- [ ] Atualizar identidade, textos, metadados e remover contatos antigos sem alterar visual ou fotos.
-- [ ] Comparar referência e atualizar solicitação demonstrativa segura com resumo.
-- [ ] Preservar avaliações e adicionar aviso interno no botão Google.
-- [ ] Verificar testes e interações em computador e celular; não publicar.
-- [ ] Reduzir ícone das fotos na etapa de serviços da solicitação de horário (estavam sobrepostos) e tornar os períodos Manhã (08h–12h), Tarde (12h–16h) e Fim da tarde (16h–19h) em linhas, conforme referência anexada.
+- [x] Pesquisar Instagram, Google (avaliações, endereço, horários).
+- [x] Identidade preto e dourado, favicon, metadados; sem Studio Deluxe/demo.
+- [x] Letreiro e 8 cards com fotos reais do Instagram.
+- [x] Resultados, avaliações reais, botão Avaliar no Google.
+- [x] FAQ, rodapé, pedidos para (61) 99423-1398.
+- [x] Ícones dos serviços no pedido; períodos 09h–19h.
+- [x] Testado celular e desktop + testes automatizados.

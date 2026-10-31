@@ -1,42 +1,56 @@
-import hero from "@/assets/ss-hero.jpg";
-import cilios from "@/assets/ss-cilios.jpg";
-import micro from "@/assets/ss-micro.jpg";
-import liso from "@/assets/ss-liso.jpg";
-import coloracao from "@/assets/ss-coloracao.jpg";
-import corte from "@/assets/ss-corte.jpg";
-import unhas from "@/assets/ss-unhas.jpg";
-import make from "@/assets/ss-make.jpg";
+import type { LucideIcon } from "lucide-react";
+import { Sparkles, Sun, Palette, Waves, Droplets, Scissors, Flower2, Heart } from "lucide-react";
+import hero from "@/assets/ib-hero.jpg.asset.json";
+import mechas from "@/assets/ib-mechas.jpg.asset.json";
+import descoloracao from "@/assets/ib-descoloracao.jpg.asset.json";
+import coloracao from "@/assets/ib-coloracao.jpg.asset.json";
+import progressiva from "@/assets/ib-progressiva.jpg.asset.json";
+import hidratacao from "@/assets/ib-hidratacao.jpg.asset.json";
+import penteado from "@/assets/ib-penteado.jpg.asset.json";
+import corte from "@/assets/ib-corte.jpg.asset.json";
+import labios from "@/assets/ib-labios.jpg.asset.json";
+
+const PLACE_ID = "ChIJR8VI7cYvWpMRV3xfmauSte8";
 
 export const SALON = {
-  name: "Studio Deluxe",
-  tagline: "Beleza e cuidado para te deixar ainda mais linda",
-  address: "Studio Deluxe · Estúdio demonstrativo",
-  hours: "Atendimento com hora marcada",
-  whatsapp: "5582991730616",
-  contact: "https://convertstudio.com.br/",
-  contactLabel: "Convert Studio",
-  heroImg: hero,
+  name: "Império da Beleza",
+  owner: "Aline Garrido",
+  tagline: "Sua melhor versão começa aqui",
+  address: "QS 12, Conj. 3A, Lote 05, Loja 02 — Riacho Fundo I, Brasília/DF, 71825-203",
+  hours: "Terça a sábado, das 9h às 19h",
+  phone: "(61) 99423-1398",
+  landline: "(61) 3301-8381",
+  whatsapp: "5561994231398",
+  instagram: "https://www.instagram.com/alinegarrido.imperiodabeleza/",
+  instagramHandle: "@alinegarrido.imperiodabeleza",
+  mapsUrl: `https://www.google.com/maps/search/?api=1&query=Salao+Imperio+Da+Beleza+By+Aline+Garrido&query_place_id=${PLACE_ID}`,
+  reviewUrl: `https://search.google.com/local/writereview?placeid=${PLACE_ID}`,
+  rating: "4,7",
+  reviewCount: 14,
+  heroImg: hero.url,
 };
 
 export const waLink = (msg: string) => SALON.whatsapp ? `https://wa.me/${SALON.whatsapp}?text=${encodeURIComponent(msg)}` : null;
 
-export type Category = "Olhar" | "Cabelos" | "Unhas & make";
+export type Category = "Loiros & cor" | "Cabelos" | "Lábios";
 
-export type Service = { id: string; title: string; short: string; category: Category; copy: string; cta: string; img: string; pros: string[] };
+export type Service = { id: string; title: string; short: string; category: Category; copy: string; cta: string; img: string; icon: LucideIcon; pros: string[] };
 
 export const SERVICES: Service[] = [
-  { id: "sobrancelhas", title: "Design de sobrancelhas", short: "SOBRANCELHAS", category: "Olhar", copy: "A especialidade da casa: desenho pensado para o formato do seu rosto.", cta: "Quero horário para sobrancelhas", img: hero, pros: [] },
-  { id: "micropigmentacao", title: "Micropigmentação", short: "MICROPIGMENTAÇÃO", category: "Olhar", copy: "Procedimento de pigmentação na pele. Tire suas dúvidas com o salão antes de marcar.", cta: "Quero horário para micropigmentação", img: micro, pros: [] },
-  { id: "cilios", title: "Cílios", short: "CÍLIOS", category: "Olhar", copy: "Atendimento em cílios para quem quer um olhar mais marcado.", cta: "Quero horário para cílios", img: cilios, pros: [] },
-  { id: "progressiva", title: "Progressiva · Liso perfeito", short: "LISO PERFEITO", category: "Cabelos", copy: "“O liso perfeito você encontra aqui” — alisamento para fios lisos e alinhados.", cta: "Quero horário para progressiva", img: liso, pros: [] },
-  { id: "coloracao", title: "Coloração & ombré hair", short: "OMBRÉ HAIR", category: "Cabelos", copy: "Mudança de cor ou degradê do escuro ao claro. O tom é combinado com você.", cta: "Quero horário para coloração", img: coloracao, pros: [] },
-  { id: "corte", title: "Corte & escova", short: "CORTE & ESCOVA", category: "Cabelos", copy: "Para renovar o formato ou sair com os fios escovados e finalizados.", cta: "Quero horário para corte ou escova", img: corte, pros: [] },
-  { id: "unhas", title: "Manicure & pedicure", short: "UNHAS", category: "Unhas & make", copy: "Mãos e pés cuidados, com a cor que você escolher.", cta: "Quero horário para unhas", img: unhas, pros: [] },
-  { id: "make", title: "Maquiagem & penteados", short: "MAQUIAGEM", category: "Unhas & make", copy: "Produção para eventos e ocasiões especiais, da make ao penteado.", cta: "Quero horário para maquiagem", img: make, pros: [] },
+  { id: "mechas", title: "Mechas", short: "MECHAS", category: "Loiros & cor", copy: "O carro-chefe da casa: mechas iluminadas, feitas com técnica e cuidado com os fios.", cta: "Quero horário para mechas", img: mechas.url, icon: Sparkles, pros: [] },
+  { id: "descoloracao", title: "Descoloração saudável", short: "DESCOLORAÇÃO SAUDÁVEL", category: "Loiros & cor", copy: "Clareamento planejado para chegar ao loiro dos sonhos preservando a saúde do cabelo.", cta: "Quero horário para descoloração", img: descoloracao.url, icon: Sun, pros: [] },
+  { id: "coloracao", title: "Coloração", short: "COLORAÇÃO", category: "Loiros & cor", copy: "Cor uniforme, cobertura de brancos ou um tom novo, como o cobre iluminado.", cta: "Quero horário para coloração", img: coloracao.url, icon: Palette, pros: [] },
+  { id: "progressiva", title: "Progressiva", short: "PROGRESSIVA", category: "Cabelos", copy: "Fios alinhados, com menos volume e muito mais facilidade no dia a dia.", cta: "Quero horário para progressiva", img: progressiva.url, icon: Waves, pros: [] },
+  { id: "hidratacao", title: "Hidratação", short: "HIDRATAÇÃO", category: "Cabelos", copy: "Tratamento para devolver brilho, maciez e força, principalmente aos fios loiros.", cta: "Quero horário para hidratação", img: hidratacao.url, icon: Droplets, pros: [] },
+  { id: "corte", title: "Corte", short: "CORTE", category: "Cabelos", copy: "Corte pensado para o seu rosto e para valorizar as suas mechas.", cta: "Quero horário para corte", img: corte.url, icon: Scissors, pros: [] },
+  { id: "penteado", title: "Escova & penteado", short: "PENTEADO", category: "Cabelos", copy: "Finalização com ondas e movimento para eventos ou para sair do salão pronta.", cta: "Quero horário para penteado", img: penteado.url, icon: Flower2, pros: [] },
+  { id: "labios", title: "Micropigmentação labial", short: "LÁBIOS", category: "Lábios", copy: "Lip blush: lábios mais corados, definidos e com aparência rejuvenescida.", cta: "Quero horário para lábios", img: labios.url, icon: Heart, pros: [] },
 ];
 
-export const CATEGORIES: ("Todos" | Category)[] = ["Todos", "Olhar", "Cabelos", "Unhas & make"];
-export const PERIODS = ["Manhã (08h–12h)", "Tarde (12h–16h)", "Fim da tarde (16h–19h)"];
+export const MARQUEE = ["MECHAS", "DESCOLORAÇÃO SAUDÁVEL", "COLORAÇÃO", "PROGRESSIVA", "HIDRATAÇÃO", "LÁBIOS", "SOBRANCELHAS", "MANICURE & PEDICURE", "MAQUIAGEM"];
+
+export const CATEGORIES: ("Todos" | Category)[] = ["Todos", "Loiros & cor", "Cabelos", "Lábios"];
+export const PERIODS = ["Manhã (09h–12h)", "Tarde (12h–16h)", "Fim da tarde (16h–19h)"];
 export const NO_PREF = "Sem preferência";
 
 export function fmtDate(d: string) {
@@ -47,16 +61,15 @@ export function fmtDate(d: string) {
 
 export function buildBookingMessage(o: { service: string; pro?: string | null; date: string; period: string; notes: string }) {
   return [
-    `Pedido de demonstração — ${SALON.name}`,
-    `Olá! Gostaria de solicitar um horário:`,
+    `Olá, ${SALON.owner}! Gostaria de agendar no ${SALON.name}:`,
     ``,
     `• Serviço: ${o.service}`,
     ...(o.pro ? [`• Profissional: ${o.pro}`] : []),
-    `• Data preferida: ${fmtDate(o.date)}`,
-    `• Período preferido: ${o.period || "A combinar"}`,
+    `• Data: ${fmtDate(o.date)}`,
+    `• Período: ${o.period || "A combinar"}`,
     ...(o.notes.trim() ? [`• Observação: ${o.notes.trim()}`] : []),
     ``,
-    `Aguardo a confirmação da disponibilidade.`,
+    `Aguardo a confirmação. Obrigada!`,
   ].join("\n");
 }
 

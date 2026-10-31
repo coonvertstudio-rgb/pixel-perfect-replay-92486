@@ -1,30 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useState } from "react";
-import { ArrowRight, MapPin, Clock, Star, ChevronDown, Menu, X, ExternalLink, MessageCircle } from "lucide-react";
-import { SALON, SERVICES, CATEGORIES } from "@/lib/salon";
+import { ArrowRight, MapPin, Clock, Star, ChevronDown, Menu, X, MessageCircle, Instagram, Phone } from "lucide-react";
+import { SALON, SERVICES, CATEGORIES, MARQUEE, waLink } from "@/lib/salon";
 import { BookingModal } from "@/components/BookingModal";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
 import before from "@/assets/hair-before.png";
 import after from "@/assets/hair-after.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Studio Deluxe — Sobrancelhas, cílios e o liso perfeito" },
-      { name: "description", content: "Studio Deluxe — Beleza & Estética. Demonstração da Convert Studio com serviços de sobrancelhas, cílios, cabelos, unhas e maquiagem." },
-      { property: "og:title", content: "Studio Deluxe — Beleza & Estética" },
-      { property: "og:description", content: "Sobrancelhas, cílios e o liso perfeito. Conheça a demonstração de beleza da Convert Studio." },
+      { title: "Império da Beleza by Aline Garrido — Mechas e loiros no Riacho Fundo I" },
+      { name: "description", content: "Salão Império da Beleza by Aline Garrido, no Riacho Fundo I (DF): mechas, descoloração saudável, coloração, progressiva, hidratação e micropigmentação labial." },
+      { property: "og:title", content: "Império da Beleza by Aline Garrido" },
+      { property: "og:description", content: "Sua melhor versão começa aqui. Mechas, loiros e lábios no Riacho Fundo I, Brasília/DF." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:url", content: "https://studio-perfect-showcase.lovable.app/" },
     ],
-    links: [{ rel: "canonical", href: "https://studio-perfect-showcase.lovable.app/" }],
   }),
   component: Index,
 });
 
-const NAV = [["Serviços", "#servicos"], ["Antes e depois", "#antes-depois"], ["Avaliações", "#avaliacoes"], ["Dúvidas", "#faq"]];
+const NAV = [["Serviços", "#servicos"], ["Resultados", "#resultados"], ["Avaliações", "#avaliacoes"], ["Dúvidas", "#faq"]];
 
 function Index() {
   const [modal, setModal] = useState<{ open: boolean; service: string | null }>({ open: false, service: null });
@@ -49,8 +46,8 @@ function Index() {
 function Logo() {
   return (
     <a href="#" className="leading-none">
-      <span className="block font-display text-2xl font-semibold tracking-tight">Studio <em className="text-brand">Deluxe</em></span>
-      <span className="mt-1 block text-[10px] uppercase tracking-[0.3em] whitespace-nowrap text-muted-foreground">Beleza & Estética</span>
+      <span className="block whitespace-nowrap font-script text-3xl leading-none sm:text-4xl">Império <span className="text-brand">da Beleza</span></span>
+      <span className="mt-1 block text-[10px] uppercase tracking-[0.3em] whitespace-nowrap text-muted-foreground">by Aline Garrido</span>
     </a>
   );
 }
@@ -65,7 +62,7 @@ function Header({ onBook }: { onBook: () => void }) {
           {NAV.map(([l, h]) => <a key={h} href={h} className="text-muted-foreground transition hover:text-primary">{l}</a>)}
         </nav>
         <div className="flex items-center gap-1">
-          <button onClick={onBook} className="whitespace-nowrap rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 sm:px-5">Solicitar horário</button>
+          <button onClick={onBook} className="whitespace-nowrap rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 sm:px-5"><span className="sm:hidden">Agendar</span><span className="hidden sm:inline">Solicitar horário</span></button>
           <button className="rounded-full p-2 md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
         </div>
       </div>
@@ -82,37 +79,32 @@ function Hero({ onBook }: { onBook: () => void }) {
   return (
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-blush blur-3xl" />
-      <div className="relative mx-auto grid max-w-6xl items-center gap-8 px-5 py-8 md:grid-cols-[1.1fr_1fr] md:gap-10 md:py-20">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-6 px-5 pb-10 pt-5 md:grid-cols-[1.1fr_1fr] md:gap-10 md:py-20">
         <div className="relative mx-auto w-full max-w-sm md:order-2 md:max-w-md">
-          <div className="absolute -inset-3 rotate-3 rounded-[2.5rem] bg-brand opacity-90" />
-          <img src={SALON.heroImg} alt="Materiais de design de sobrancelhas sobre mármore" width={1024} height={1280} className="relative aspect-[4/5] w-full rounded-[2.5rem] object-cover shadow-soft" />
-          <div className="absolute -bottom-5 left-4 rounded-2xl bg-card px-4 py-3 shadow-soft">
-            <p className="font-display text-lg leading-tight">Master em sobrancelhas</p>
-            <p className="text-xs text-muted-foreground">e cílios</p>
+          <div className="absolute -inset-2 rotate-2 rounded-[2.2rem] bg-brand opacity-90 md:-inset-3 md:rotate-3" />
+          <img src={SALON.heroImg} alt="Cliente com mechas loiras iluminadas feitas no Império da Beleza" width={640} height={640} fetchPriority="high" className="relative aspect-[5/4] w-full rounded-[2.2rem] object-cover object-[50%_30%] shadow-soft md:aspect-[4/5]" />
+          <div className="absolute -bottom-4 left-4 rounded-2xl bg-card px-4 py-2.5 shadow-soft">
+            <p className="font-display text-base leading-tight sm:text-lg">Especialista em mechas</p>
+            <p className="text-xs text-muted-foreground">e descoloração saudável</p>
           </div>
         </div>
-        <div className="md:order-1">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border bg-card px-3.5 py-1.5 text-xs uppercase tracking-[0.2em] text-primary">
-            <MapPin className="h-3.5 w-3.5" /> Estúdio demonstrativo
+        <div className="pt-3 md:order-1 md:pt-0">
+          <p className="mb-3 inline-flex items-center gap-2 rounded-full border bg-card px-3.5 py-1.5 text-[11px] uppercase tracking-[0.2em] text-primary">
+            <MapPin className="h-3.5 w-3.5" /> Riacho Fundo I · Brasília/DF
           </p>
-          <h1 className="font-display text-4xl leading-[1.02] sm:text-6xl lg:text-7xl">
-            Sobrancelhas, cílios e <em className="text-brand">o liso perfeito.</em>
+          <h1 className="font-display text-[2.15rem] leading-[1.05] sm:text-6xl lg:text-7xl">
+            Sua melhor versão <em className="text-brand">começa aqui.</em>
           </h1>
-          <p className="mt-4 max-w-md text-base text-muted-foreground sm:text-lg">
-            Master em sobrancelhas e cílios, com cabelos, unhas e maquiagem no mesmo lugar. Escolha seu serviço e fale com a gente.
+          <p className="mt-3 max-w-md text-base text-muted-foreground sm:text-lg">
+            Mechas, loiros e lábios com atendimento humanizado da Aline Garrido e equipe.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <button onClick={onBook} className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-medium text-primary-foreground shadow-soft transition hover:opacity-90 sm:px-7 sm:py-3.5 sm:text-base">
+          <div className="mt-5 flex flex-wrap gap-3">
+            <button onClick={onBook} className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-soft transition hover:opacity-90 sm:px-7 sm:py-3.5 sm:text-base">
               Solicitar horário <ArrowRight className="h-4 w-4" />
             </button>
             <a href="#servicos" className="rounded-full border bg-card px-6 py-3 text-sm font-medium transition hover:border-primary sm:px-7 sm:py-3.5 sm:text-base">Ver serviços</a>
           </div>
-          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
-            <a href={SALON.contact} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-primary hover:underline">
-              <MessageCircle className="h-4 w-4" /> Falar com a Convert Studio
-            </a>
-            <p className="flex items-center gap-2 text-sm text-muted-foreground"><Clock className="h-4 w-4 shrink-0 text-primary" /> {SALON.hours}</p>
-          </div>
+          <p className="mt-5 flex items-center gap-2 text-sm text-muted-foreground"><Clock className="h-4 w-4 shrink-0 text-accent" /> {SALON.hours}</p>
         </div>
       </div>
     </section>
@@ -121,13 +113,13 @@ function Hero({ onBook }: { onBook: () => void }) {
 
 function ServiceMarquee() {
   return (
-    <div className="overflow-hidden border-y border-primary-foreground/25 bg-primary py-3.5 text-primary-foreground md:py-[18px]" aria-label="Serviços do Studio Deluxe">
+    <div className="overflow-hidden border-y border-primary-foreground/25 bg-primary py-3.5 text-primary-foreground md:py-[18px]" aria-label="Serviços do Império da Beleza">
       <div className="marquee-track flex w-max font-display text-xl uppercase tracking-[0.14em] sm:text-2xl">
         {[0, 1].map((copy) => (
           <div key={copy} className="flex shrink-0 items-center gap-7 pr-7" aria-hidden={copy === 1}>
-            {SERVICES.map((s) => (
-              <span key={s.id} className="flex shrink-0 items-center gap-7">
-                <span>{s.short}</span><span className="text-primary-foreground/80" aria-hidden="true">✦</span>
+            {MARQUEE.map((m) => (
+              <span key={m} className="flex shrink-0 items-center gap-7">
+                <span>{m}</span><span className="text-gold" aria-hidden="true">♛</span>
               </span>
             ))}
           </div>
@@ -153,7 +145,7 @@ function Services({ onBook }: { onBook: (id: string) => void }) {
   return (
     <section id="servicos" className="scroll-mt-20 bg-secondary/50 py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-5">
-        <SectionTitle eyebrow="Nossos serviços" title={<>Do olhar <em className="text-brand">aos fios.</em></>} sub="Escolha o serviço e solicite um horário. Os valores são informados pelo salão." />
+        <SectionTitle eyebrow="Nossos serviços" title={<>Dos loiros <em className="text-brand">aos lábios.</em></>} sub="Escolha o serviço e solicite seu horário pelo WhatsApp." />
         <div className="-mx-5 mb-8 flex snap-x gap-3.5 overflow-x-auto px-5 pb-2 sm:gap-4">
           {CATEGORIES.map((c) => (
             <button key={c} aria-pressed={cat === c} onClick={() => setCat(c)} className={`shrink-0 snap-start rounded-full border px-5 py-2.5 text-sm transition ${cat === c ? "border-primary bg-primary text-primary-foreground" : "bg-card hover:border-primary"}`}>{c}</button>
@@ -176,8 +168,8 @@ function Services({ onBook }: { onBook: (id: string) => void }) {
           ))}
         </div>
         <p className="mt-8 text-center text-sm text-muted-foreground">
-          Não sabe qual escolher?{" "}
-          <Button variant="link" onClick={() => onBook("")} className="h-auto p-0 font-medium">Veja as opções.</Button>
+          Também fazemos sobrancelhas, manicure e pedicure, alongamento de unhas, depilação e maquiagem.{" "}
+          <Button variant="link" onClick={() => onBook("")} className="h-auto p-0 font-medium">Solicitar horário.</Button>
         </p>
       </div>
     </section>
@@ -187,9 +179,9 @@ function Services({ onBook }: { onBook: (id: string) => void }) {
 function BeforeAfter() {
   const [pos, setPos] = useState(50);
   return (
-    <section id="antes-depois" className="scroll-mt-20 py-16 md:py-24">
+    <section id="resultados" className="scroll-mt-20 py-16 md:py-24">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 md:grid-cols-2">
-        <SectionTitle eyebrow="Antes e depois" title={<>Arraste e veja <em className="text-brand">a diferença.</em></>} sub="Coloração aplicada, brilho de volta e fios alinhados: o cuidado que o seu cabelo merece aqui no salão." />
+        <SectionTitle eyebrow="Resultados" title={<>Arraste e veja <em className="text-brand">a diferença.</em></>} sub="Mechas, descoloração saudável e hidratação: loiros iluminados com fios macios e brilhantes, do jeito que você sonhou." />
         <div className="relative aspect-square w-full select-none overflow-hidden rounded-3xl shadow-soft">
           <img src={after} alt="Depois" className="absolute inset-0 h-full w-full object-cover" />
           <img src={before} alt="Antes" className="absolute inset-0 h-full w-full object-cover" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }} />
@@ -206,9 +198,9 @@ function BeforeAfter() {
 }
 
 const REVIEWS = [
-  "Profissional extremamente competente. Parabéns pelo profissionalismo.",
-  "Lugar muito agradável, limpo, profissionais muito competentes e preço bom. Super recomendo!",
-  "Ótimo serviço e excelente relação custo benefício!",
+  { name: "Amanda Carvalho", text: "Excelente atendimento. A Aline é um amor de pessoa e a manicure Gisele fez minha unha como ninguém havia feito antes. Parabéns pelo excelente trabalho 👏🏻❤️" },
+  { name: "Ana Julia Garrido", text: "Foi perfeito, fui tratada muito bem e fiquei muito linda fazem um ótimo serviço, continuem assim!!!" },
+  { name: "David Silva", text: "Fui muito bem recepcionado pela Aline, no Salão Império da Beleza By Aline Garrido. Atendimento excelente e um negócio com grande potencial! Atenciosa e cordial ao nos receber." },
 ];
 
 function Reviews() {
@@ -217,60 +209,52 @@ function Reviews() {
       <div className="mx-auto max-w-6xl px-5">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-xl">
-            <p className="mb-3 text-xs uppercase tracking-[0.25em] text-blush">Avaliações</p>
-            <h2 className="font-display text-4xl leading-tight sm:text-5xl">O que dizem <em>as clientes.</em></h2>
+            <p className="mb-3 text-xs uppercase tracking-[0.25em] text-gold">Avaliações no Google</p>
+            <h2 className="font-display text-4xl leading-tight sm:text-5xl">O que dizem <em className="text-gold">as clientes.</em></h2>
           </div>
           <div className="flex items-center gap-3">
-            <span className="font-display text-5xl">4,9</span>
+            <span className="font-display text-5xl">{SALON.rating}</span>
             <div>
-              <div className="flex text-primary">{[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}</div>
-              <p className="text-xs opacity-70">Classificação demonstrativa</p>
+              <div className="flex text-gold">{[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}</div>
+              <p className="text-xs opacity-70">{SALON.reviewCount} avaliações no Google</p>
             </div>
           </div>
         </div>
         <div className="grid gap-5 md:grid-cols-3">
           {REVIEWS.map((r) => (
-            <figure key={r} className="rounded-3xl border border-plum-foreground/15 p-6">
-              <div className="mb-4 flex text-primary">{[...Array(5)].map((_, k) => <Star key={k} className="h-3.5 w-3.5 fill-current" />)}</div>
-              <blockquote className="font-display text-xl italic leading-snug">“{r}”</blockquote>
+            <figure key={r.name} className="flex flex-col rounded-3xl border border-plum-foreground/15 p-6">
+              <div className="mb-4 flex text-gold">{[...Array(5)].map((_, k) => <Star key={k} className="h-3.5 w-3.5 fill-current" />)}</div>
+              <blockquote className="flex-1 font-display text-xl italic leading-snug">“{r.text}”</blockquote>
+              <figcaption className="mt-5 text-sm font-medium">{r.name}</figcaption>
             </figure>
           ))}
         </div>
-        <p className="mt-6 text-xs opacity-60">Depoimentos ilustrativos para demonstração.</p>
       </div>
     </section>
   );
 }
 
 function GoogleReview() {
-  const [open, setOpen] = useState(false);
   return (
     <section className="px-5 py-12">
       <div className="mx-auto flex max-w-4xl flex-col items-center gap-5 rounded-3xl border bg-card px-6 py-8 text-center shadow-soft sm:flex-row sm:text-left">
         <div className="flex-1">
-          <h3 className="font-display text-3xl">Já foi atendida no Studio Deluxe?</h3>
+          <h3 className="font-display text-3xl">Já foi atendida no Império da Beleza?</h3>
           <p className="mt-1 text-sm text-muted-foreground">Sua avaliação ajuda outras clientes a nos encontrarem.</p>
         </div>
-        <Button variant="outline" onClick={() => setOpen(true)} className="h-auto inline-flex shrink-0 items-center gap-2 rounded-full border border-primary px-6 py-3 font-medium text-primary hover:bg-primary hover:text-primary-foreground">
-          <Star className="h-4 w-4" /> Avaliar no Google
+        <Button asChild variant="outline" className="h-auto inline-flex shrink-0 items-center gap-2 rounded-full border border-primary px-6 py-3 font-medium text-primary hover:bg-primary hover:text-primary-foreground">
+          <a href={SALON.reviewUrl} target="_blank" rel="noopener noreferrer"><Star className="h-4 w-4" /> Avaliar no Google</a>
         </Button>
       </div>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-[calc(100%_-_2rem)] rounded-3xl bg-card shadow-soft sm:max-w-lg">
-          <DialogTitle className="font-display text-2xl">Avaliar no Google</DialogTitle>
-          <DialogDescription>Esta é uma demonstração da Convert Studio. Em um site real, este botão direciona as clientes à página de avaliações do estabelecimento no Google.</DialogDescription>
-          <DialogClose asChild><Button className="rounded-full">Fechar</Button></DialogClose>
-        </DialogContent>
-      </Dialog>
     </section>
   );
 }
 
 const FAQ = [
-  ["Quais serviços para o olhar o Studio Deluxe faz?", "Design de sobrancelhas, cílios e micropigmentação — sobrancelhas e cílios são a especialidade da casa. Escolha o serviço para experimentar a solicitação de horário."],
-  ["Vocês fazem progressiva e coloração?", "Sim. Na parte de cabelos, o salão divulga progressiva (o “liso perfeito”), coloração, ombré hair, corte, escova e penteados."],
-  ["Quanto custa?", "Os valores são informados pelo salão, conforme o serviço escolhido. Nesta demonstração, você pode revisar uma solicitação sem confirmar um agendamento."],
-  ["Como solicito um horário?", "Escolha o serviço e informe suas preferências em “Solicitar horário”. Nesta demonstração, revise o pedido e envie à Convert Studio ou copie a mensagem. Em um site real, o salão confirmará a disponibilidade pelo WhatsApp."],
+  ["Quais são os serviços principais?", "Mechas, descoloração saudável, coloração, progressiva, hidratação e micropigmentação labial. Também fazemos sobrancelhas, unhas, depilação e maquiagem."],
+  ["A descoloração estraga o cabelo?", "Trabalhamos com descoloração saudável: o clareamento é planejado com cuidado para chegar ao tom desejado preservando os fios."],
+  ["Quanto custa?", "O valor depende do serviço e do comprimento do cabelo. Mande sua solicitação pelo WhatsApp que a gente informa."],
+  ["Como agendo e onde fica o salão?", "Clique em “Solicitar horário” e envie o pedido pelo WhatsApp. Atendemos de terça a sábado, das 9h às 19h, na QS 12 do Riacho Fundo I."],
 ];
 
 function Faq() {
@@ -295,6 +279,7 @@ function Faq() {
 }
 
 function Footer() {
+  const wa = waLink(`Olá, ${SALON.owner}! Vim pelo site do ${SALON.name}.`);
   return (
     <footer className="border-t bg-secondary/50">
       <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 sm:grid-cols-2 lg:grid-cols-4">
@@ -302,14 +287,15 @@ function Footer() {
           <Logo />
           <p className="mt-3 text-sm text-muted-foreground">{SALON.tagline}.</p>
         </div>
-        <p className="flex gap-3 text-sm"><MapPin className="h-4 w-4 shrink-0 text-primary" />{SALON.address}</p>
+        <a href={SALON.mapsUrl} target="_blank" rel="noopener noreferrer" className="flex gap-3 text-sm hover:text-accent"><MapPin className="h-4 w-4 shrink-0 text-accent" /><span>{SALON.address}<span className="mt-1 block font-medium underline underline-offset-4">Ver no Google Maps</span></span></a>
         <div className="grid content-start gap-3 text-sm">
-          <p className="flex gap-3"><Clock className="h-4 w-4 shrink-0 text-primary" />{SALON.hours}</p>
-          <a href={SALON.contact} target="_blank" rel="noopener noreferrer" className="flex gap-3 font-medium text-primary hover:underline"><MessageCircle className="h-4 w-4 shrink-0" />Falar com a Convert Studio</a>
+          <p className="flex gap-3"><Clock className="h-4 w-4 shrink-0 text-accent" />{SALON.hours}</p>
+          {wa && <a href={wa} target="_blank" rel="noopener noreferrer" className="flex gap-3 font-medium hover:text-accent"><MessageCircle className="h-4 w-4 shrink-0 text-accent" />WhatsApp {SALON.phone}</a>}
+          <p className="flex gap-3"><Phone className="h-4 w-4 shrink-0 text-accent" />{SALON.landline}</p>
         </div>
-        <a href={SALON.contact} target="_blank" rel="noopener noreferrer" className="flex gap-3 text-sm hover:text-primary">{SALON.contactLabel} <ExternalLink className="h-3 w-3" /></a>
+        <a href={SALON.instagram} target="_blank" rel="noopener noreferrer" className="flex h-fit gap-3 text-sm hover:text-accent"><Instagram className="h-4 w-4 shrink-0 text-accent" />{SALON.instagramHandle}</a>
       </div>
-      <p className="border-t py-5 text-center text-xs text-muted-foreground">Studio Deluxe — site demonstrativo desenvolvido pela Convert Studio.</p>
+      <p className="border-t py-5 text-center text-xs text-muted-foreground">© {SALON.name} by {SALON.owner} · Riacho Fundo I, Brasília/DF</p>
     </footer>
   );
 }
