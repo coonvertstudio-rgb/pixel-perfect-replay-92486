@@ -11,3 +11,4 @@
 
 - Keep salon identity and contact configuration in `src/lib/salon.ts`; all booking destinations must use its nullable WhatsApp URL helper so an unconfigured demo cannot send requests to third parties.
 - Use existing Radix dialog primitives for demonstration dialogs and the booking modal to provide focus containment, Escape handling, and focus restoration without changing the approved layout.
+- Salon photos live as local files in src/assets and are imported directly, so the site deploys to any host (e.g. Vercel) without the Lovable CDN.
